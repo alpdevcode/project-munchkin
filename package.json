@@ -1,0 +1,19 @@
+{
+  "name": "project-munchkin",
+  "version": "1.0.0",
+  "description": "Homage to all the cute and and active munchkins in the world",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alpdevcode/project-munchkin.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alpdevcode/project-munchkin/issues"
+  },
+  "homepage": "https://github.com/alpdevcode/project-munchkin#readme"
+}
