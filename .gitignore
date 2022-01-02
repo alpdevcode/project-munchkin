@@ -1,2 +1,9 @@
 # Developer Notes
 devNotes.txt
+
+# Openzeppelin Library
+node_modules
+package.json
+
+# Compilation artifacts
+build
