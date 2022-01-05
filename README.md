@@ -8,4 +8,4 @@ Library - Openzeppelin, Uniswap
 Project Initialization
 - npm init
 - truffle init
-- npm install @openzeppelin/contracts @uniswap/v2-core @uniswap/v2-periphery
+- npm install @openzeppelin/contracts @uniswap/v2-core @uniswap/v2-periphery @truffle/hdwallet-provider

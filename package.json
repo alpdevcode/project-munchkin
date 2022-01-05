@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/alpdevcode/project-munchkin/issues"
   },
-  "homepage": "https://github.com/alpdevcode/project-munchkin#readme"
+  "homepage": "https://github.com/alpdevcode/project-munchkin#readme",
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.4.1",
+    "@truffle/hdwallet-provider": "^2.0.0",
+    "@uniswap/v2-core": "^1.0.1",
+    "@uniswap/v2-periphery": "^1.1.0-beta.0"
+  }
 }
