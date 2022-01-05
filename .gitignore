@@ -3,7 +3,12 @@ devNotes.txt
 
 # Openzeppelin Library
 node_modules
-package.json
 
 # Compilation artifacts
 build
+
+# Truffle Configuration
+truffle-config.js
+
+# Secret Mnemonics and NodeURL
+secret.json
