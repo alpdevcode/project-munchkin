@@ -1,20 +1,36 @@
 pragma solidity ^0.8.9;
 
-import '../node_modules/@openzeppelin/contracts/token/ERC20/IERC20.sol';
-import '../node_modules/@openzeppelin/contracts/utils/math/SafeMath.sol';
-import '../node_modules/@openzeppelin/contracts/access/Ownable.sol';
-import '../node_modules/@openzeppelin/contracts/utils/Address.sol';
-import '../node_modules/@uniswap/v2-core/contracts/interfaces/IUniswapV2Factory.sol';
-import '../node_modules/@uniswap/v2-core/contracts/interfaces/IUniswapV2Pair.sol';
-import '../node_modules/@uniswap/v2-periphery/contracts/interfaces/IUniswapV2Router02.sol';
+// Committed 
+import '../../node_modules/@openzeppelin/contracts/token/ERC20/IERC20.sol';
+import '../../node_modules/@openzeppelin/contracts/utils/math/SafeMath.sol';
+import '../../node_modules/@openzeppelin/contracts/access/Ownable.sol';
+import '../../node_modules/@openzeppelin/contracts/utils/Address.sol';
+import '../../node_modules/@uniswap/v2-core/contracts/interfaces/IUniswapV2Factory.sol';
+import '../../node_modules/@uniswap/v2-core/contracts/interfaces/IUniswapV2Pair.sol';
+import '../../node_modules/@uniswap/v2-periphery/contracts/interfaces/IUniswapV2Router02.sol';
+
+// Standard Library for Deployment
+// import '@openzeppelin/contracts/token/ERC20/IERC20.sol';
+// import '@openzeppelin/contracts/utils/math/SafeMath.sol';
+// import '@openzeppelin/contracts/access/Ownable.sol';
+// import '@openzeppelin/contracts/utils/Address.sol';
+
+// Uniswap Support for Deployment
+// import '@uniswap/v2-core/contracts/interfaces/IUniswapV2Factory.sol';
+// import '@uniswap/v2-core/contracts/interfaces/IUniswapV2Pair.sol';
+// import '@uniswap/v2-periphery/contracts/interfaces/IUniswapV2Router02.sol';
 
 contract MyToken is Context, IERC20, Ownable {
     using SafeMath for uint256;
     using Address for address;
 
+    // // Test Marketing Address - Committed
+    // address payable public marketingAddress =
+    // payable(0x000000000000000000000000000000000000dEaD);
+
     // Test Marketing Address
     address payable public marketingAddress =
-    payable(0x000000000000000000000000000000000000dEaD);
+    payable(0x9be7E2e561965EBb4D4Ab98273d8f21701E4eB48);
 
     // address public immutable deadAddress =
     // 0x000000000000000000000000000000000000dEaD;
@@ -634,6 +650,11 @@ contract MyToken is Context, IERC20, Ownable {
         recipient.transfer(amount);
     }
 
+    function setFeeRate(uint256 rate) external onlyOwner {
+        _feeRate = rate;
+    }
+
+    // Antibot mechanism
     function isRemovedSniper(address account) public view returns (bool) {
         return _isSniper[account];
     }
@@ -660,10 +681,7 @@ contract MyToken is Context, IERC20, Ownable {
         }
     }
 
-    function setFeeRate(uint256 rate) external onlyOwner {
-        _feeRate = rate;
-    }
-
+    // fallback
     //to recieve ETH from uniswapV2Router when swaping
     receive() external payable {}
 
