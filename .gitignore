@@ -12,3 +12,6 @@ truffle-config.js
 
 # Secret Mnemonics and NodeURL
 secret.json
+
+# Off Chain Server Configuration
+server-config.js

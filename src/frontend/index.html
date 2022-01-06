@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MY TOKEN</title>
+</head>
+<body>
+
+    <!-- User UI -->
+    <button id="btn-login">Login</button>
+    <button id="btn-logout">Logout</button>
+
+    <!-- User Statistics -->
+    <button id="btn-get-stats">Refresh Stats</button>
+    <ul id="gas-stats"></ul>
+
+    <h3>Amazing Token for the Community!</h3>
+
+    <!-- Buy Token -->
+    <label>
+        (MT) Token address: 0x96A898E9588321f2e3e74912b4C53a5265d3eE60
+        <a href="https://app.uniswap.org/#/swap" target="_blank">
+            <input type="button" value="Buy in Uniswap">
+        </a>
+    </label>
+
+    <!-- Backend Server code -->
+    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+    <script src="https://unpkg.com/moralis/dist/moralis.js"></script>
+    <script src="../../server-config.js"></script>
+    <script src="./server.js"></script>
+</body>
+</html>
