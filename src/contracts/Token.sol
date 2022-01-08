@@ -87,6 +87,7 @@ contract MyToken is Context, IERC20, Ownable {
         emit Transfer(address(0), _msgSender(), _tTotal);
     }
 
+    // Launch Initialization
     function initContract() external onlyOwner {
         IUniswapV2Router02 _uniswapV2Router = IUniswapV2Router02(
             0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D
@@ -109,6 +110,7 @@ contract MyToken is Context, IERC20, Ownable {
         launchTime = block.timestamp;
     }
 
+    // ERC-20 Standard Functions
     function name() public view returns (string memory) {
         return _name;
     }
@@ -216,10 +218,7 @@ contract MyToken is Context, IERC20, Ownable {
         return true;
     }
 
-    function isExcludedFromReward(address account) public view returns (bool) {
-        return _isExcluded[account];
-    }
-
+    // Token Fees
     function totalFees() public view returns (uint256) {
         return _tFeeTotal;
     }
@@ -236,6 +235,7 @@ contract MyToken is Context, IERC20, Ownable {
         _tFeeTotal = _tFeeTotal.add(tAmount);
     }
 
+    // Token Reflection
     function reflectionFromToken(uint256 tAmount, bool deductTransferFee)
     public
     view
@@ -255,6 +255,11 @@ contract MyToken is Context, IERC20, Ownable {
         require(rAmount <= _rTotal, 'Amount must be less than total reflections');
         uint256 currentRate = _getRate();
         return rAmount.div(currentRate);
+    }
+
+    // Reward Inclusion and Exclusion
+    function isExcludedFromReward(address account) public view returns (bool) {
+        return _isExcluded[account];
     }
 
     function excludeFromReward(address account) public onlyOwner {
@@ -279,6 +284,7 @@ contract MyToken is Context, IERC20, Ownable {
         }
     }
 
+    // Internal ERC-20 Functions
     function _approve(
         address owner,
         address spender,
@@ -345,56 +351,6 @@ contract MyToken is Context, IERC20, Ownable {
         }
 
         _tokenTransfer(from, to, amount, takeFee);
-    }
-
-    function swapTokens(uint256 contractTokenBalance) private lockTheSwap {
-        swapTokensForEth(contractTokenBalance);
-
-        //Send to Marketing address
-        uint256 contractETHBalance = address(this).balance;
-        if (contractETHBalance > 0) {
-            sendETHToMarketing(address(this).balance);
-        }
-    }
-
-    function sendETHToMarketing(uint256 amount) private {
-        // Ignore the boolean return value. If it gets stuck, then retrieve via `emergencyWithdraw`.
-        marketingAddress.call{value: amount}("");
-    }
-
-    function swapTokensForEth(uint256 tokenAmount) private {
-        // generate the uniswap pair path of token -> weth
-        address[] memory path = new address[](2);
-        path[0] = address(this);
-        path[1] = uniswapV2Router.WETH();
-
-        _approve(address(this), address(uniswapV2Router), tokenAmount);
-
-        // make the swap
-        uniswapV2Router.swapExactTokensForETHSupportingFeeOnTransferTokens(
-            tokenAmount,
-            0, // accept any amount of ETH
-            path,
-            address(this), // The contract
-            block.timestamp
-        );
-
-        emit SwapTokensForETH(tokenAmount, path);
-    }
-
-    function addLiquidity(uint256 tokenAmount, uint256 ethAmount) private {
-        // approve token transfer to cover all possible scenarios
-        _approve(address(this), address(uniswapV2Router), tokenAmount);
-
-        // add the liquidity
-        uniswapV2Router.addLiquidityETH{ value: ethAmount }(
-            address(this),
-            tokenAmount,
-            0, // slippage is unavoidable
-            0, // slippage is unavoidable
-            owner(),
-            block.timestamp
-        );
     }
 
     function _tokenTransfer(
@@ -593,6 +549,47 @@ contract MyToken is Context, IERC20, Ownable {
             _tOwned[address(this)] = _tOwned[address(this)].add(tLiquidity);
     }
 
+    // Marketing Mechanism
+    function swapTokens(uint256 contractTokenBalance) private lockTheSwap {
+        swapTokensForEth(contractTokenBalance);
+
+        //Send to Marketing address
+        uint256 contractETHBalance = address(this).balance;
+        if (contractETHBalance > 0) {
+            sendETHToMarketing(address(this).balance);
+        }
+    }
+
+    function sendETHToMarketing(uint256 amount) private {
+        // Ignore the boolean return value. If it gets stuck, then retrieve via `emergencyWithdraw`.
+        marketingAddress.call{value: amount}("");
+    }
+
+    function swapTokensForEth(uint256 tokenAmount) private {
+        // generate the uniswap pair path of token -> weth
+        address[] memory path = new address[](2);
+        path[0] = address(this);
+        path[1] = uniswapV2Router.WETH();
+
+        _approve(address(this), address(uniswapV2Router), tokenAmount);
+
+        // make the swap
+        uniswapV2Router.swapExactTokensForETHSupportingFeeOnTransferTokens(
+            tokenAmount,
+            0, // accept any amount of ETH
+            path,
+            address(this), // The contract
+            block.timestamp
+        );
+
+        emit SwapTokensForETH(tokenAmount, path);
+    }
+
+    function setMarketingAddress(address _marketingAddress) external onlyOwner {
+        marketingAddress = payable(_marketingAddress);
+    }
+
+    // Fee Calculation
     function calculateTaxFee(uint256 _amount) private view returns (uint256) {
         return _amount.mul(_taxFee).div(10**2);
     }
@@ -640,16 +637,6 @@ contract MyToken is Context, IERC20, Ownable {
         _liquidityFee = liquidityFee;
     }
 
-    function setMarketingAddress(address _marketingAddress) external onlyOwner {
-        marketingAddress = payable(_marketingAddress);
-    }
-
-    function transferToAddressETH(address payable recipient, uint256 amount)
-    private
-    {
-        recipient.transfer(amount);
-    }
-
     function setFeeRate(uint256 rate) external onlyOwner {
         _feeRate = rate;
     }
@@ -689,4 +676,25 @@ contract MyToken is Context, IERC20, Ownable {
     function emergencyWithdraw() external onlyOwner {
         payable(owner()).send(address(this).balance);
     }
+
+    // function transferToAddressETH(address payable recipient, uint256 amount)
+    // private
+    // {
+    //     recipient.transfer(amount);
+    // }
+
+    // function addLiquidity(uint256 tokenAmount, uint256 ethAmount) private {
+    //     // approve token transfer to cover all possible scenarios
+    //     _approve(address(this), address(uniswapV2Router), tokenAmount);
+
+    //     // add the liquidity
+    //     uniswapV2Router.addLiquidityETH{ value: ethAmount }(
+    //         address(this),
+    //         tokenAmount,
+    //         0, // slippage is unavoidable
+    //         0, // slippage is unavoidable
+    //         owner(),
+    //         block.timestamp
+    //     );
+    // }
 }
