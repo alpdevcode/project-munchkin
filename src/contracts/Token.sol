@@ -305,10 +305,10 @@ contract MyToken is Context, IERC20, Ownable {
         require(from != address(0), 'ERC20: transfer from the zero address');
         require(to != address(0), 'ERC20: transfer to the zero address');
         require(amount > 0, 'Transfer amount must be greater than zero');
-        require(!_isSniper[to], 'You have no power here!');
-        require(!_isSniper[msg.sender], 'You have no power here!');
+        require(!_isSniper[to], 'Not allowed to transfer to the recipient');
+        require(!_isSniper[msg.sender], 'You are not allowed to make a transfer');
 
-        // buy
+        // buy tokens
         if (
             from == uniswapV2Pair &&
             to != address(uniswapV2Router) &&
@@ -325,7 +325,7 @@ contract MyToken is Context, IERC20, Ownable {
 
         uint256 contractTokenBalance = balanceOf(address(this));
 
-        //sell
+        //sell tokens
 
         if (!inSwapAndLiquify && tradingOpen && to == uniswapV2Pair) {
             if (contractTokenBalance > 0) {
