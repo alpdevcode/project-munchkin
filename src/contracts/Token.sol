@@ -374,6 +374,7 @@ contract MyToken is Context, IERC20, Ownable {
         if (!takeFee) restoreAllFee();
     }
 
+    // Transfer types based on reward exclusion
     function _transferStandard(
         address sender,
         address recipient,
@@ -458,6 +459,7 @@ contract MyToken is Context, IERC20, Ownable {
         emit Transfer(sender, recipient, tTransferAmount);
     }
 
+    // Internal Calculations for values, rates, fees
     function _reflectFee(uint256 rFee, uint256 tFee) private {
         _rTotal = _rTotal.sub(rFee);
         _tFeeTotal = _tFeeTotal.add(tFee);
