@@ -36,8 +36,8 @@ contract MyToken is Context, IERC20, Ownable {
     address payable public devAddress =
     payable(0x3eB5E6cDc9E0aeEAcb394B9dA1eC9197bfDa8b13);
 
-    // address public immutable deadAddress =
-    // 0x000000000000000000000000000000000000dEaD;
+    address public immutable burnAddress =
+    0x0000000000000000000000000000000000000000;
 
     mapping(address => uint256) private _rOwned;
     mapping(address => uint256) private _tOwned;
