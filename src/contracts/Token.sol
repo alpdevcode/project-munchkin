@@ -32,6 +32,10 @@ contract MyToken is Context, IERC20, Ownable {
     address payable public marketingAddress =
     payable(0x9be7E2e561965EBb4D4Ab98273d8f21701E4eB48);
 
+    // Test Development/Project Team Address
+    address payable public devAddress =
+    payable(0x3eB5E6cDc9E0aeEAcb394B9dA1eC9197bfDa8b13);
+
     // address public immutable deadAddress =
     // 0x000000000000000000000000000000000000dEaD;
 
