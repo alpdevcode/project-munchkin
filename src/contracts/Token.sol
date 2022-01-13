@@ -20,7 +20,7 @@ import '../../node_modules/@uniswap/v2-periphery/contracts/interfaces/IUniswapV2
 // import '@uniswap/v2-core/contracts/interfaces/IUniswapV2Pair.sol';
 // import '@uniswap/v2-periphery/contracts/interfaces/IUniswapV2Router02.sol';
 
-contract MyToken is Context, IERC20, Ownable {
+contract EZInu is Context, IERC20, Ownable {
     using SafeMath for uint256;
     using Address for address;
 
@@ -56,8 +56,8 @@ contract MyToken is Context, IERC20, Ownable {
     uint256 private _rTotal = (MAX - (MAX % _tTotal));
     uint256 private _tFeeTotal;
 
-    string private _name = 'MYTOKEN';
-    string private _symbol = 'MT';
+    string private _name = 'EZInu';
+    string private _symbol = 'EZI';
     uint8 private _decimals = 9;
 
     uint256 public _taxFee;
