@@ -1,5 +1,5 @@
-const MyToken = artifacts.require("MyToken");
+const EZInu = artifacts.require("EZInu");
 
 module.exports = function (deployer) {
-  deployer.deploy(MyToken);
+  deployer.deploy(EZInu);
 };
