@@ -1,24 +1,24 @@
 pragma solidity ^0.8.9;
 
 // Committed 
-import '../../node_modules/@openzeppelin/contracts/token/ERC20/IERC20.sol';
-import '../../node_modules/@openzeppelin/contracts/utils/math/SafeMath.sol';
-import '../../node_modules/@openzeppelin/contracts/access/Ownable.sol';
-import '../../node_modules/@openzeppelin/contracts/utils/Address.sol';
-import '../../node_modules/@uniswap/v2-core/contracts/interfaces/IUniswapV2Factory.sol';
-import '../../node_modules/@uniswap/v2-core/contracts/interfaces/IUniswapV2Pair.sol';
-import '../../node_modules/@uniswap/v2-periphery/contracts/interfaces/IUniswapV2Router02.sol';
+// import '../../node_modules/@openzeppelin/contracts/token/ERC20/IERC20.sol';
+// import '../../node_modules/@openzeppelin/contracts/utils/math/SafeMath.sol';
+// import '../../node_modules/@openzeppelin/contracts/access/Ownable.sol';
+// import '../../node_modules/@openzeppelin/contracts/utils/Address.sol';
+// import '../../node_modules/@uniswap/v2-core/contracts/interfaces/IUniswapV2Factory.sol';
+// import '../../node_modules/@uniswap/v2-core/contracts/interfaces/IUniswapV2Pair.sol';
+// import '../../node_modules/@uniswap/v2-periphery/contracts/interfaces/IUniswapV2Router02.sol';
 
 // Standard Library for Deployment
-// import '@openzeppelin/contracts/token/ERC20/IERC20.sol';
-// import '@openzeppelin/contracts/utils/math/SafeMath.sol';
-// import '@openzeppelin/contracts/access/Ownable.sol';
-// import '@openzeppelin/contracts/utils/Address.sol';
+import '@openzeppelin/contracts/token/ERC20/IERC20.sol';
+import '@openzeppelin/contracts/utils/math/SafeMath.sol';
+import '@openzeppelin/contracts/access/Ownable.sol';
+import '@openzeppelin/contracts/utils/Address.sol';
 
 // Uniswap Support for Deployment
-// import '@uniswap/v2-core/contracts/interfaces/IUniswapV2Factory.sol';
-// import '@uniswap/v2-core/contracts/interfaces/IUniswapV2Pair.sol';
-// import '@uniswap/v2-periphery/contracts/interfaces/IUniswapV2Router02.sol';
+import '@uniswap/v2-core/contracts/interfaces/IUniswapV2Factory.sol';
+import '@uniswap/v2-core/contracts/interfaces/IUniswapV2Pair.sol';
+import '@uniswap/v2-periphery/contracts/interfaces/IUniswapV2Router02.sol';
 
 contract EZInu is Context, IERC20, Ownable {
     using SafeMath for uint256;
