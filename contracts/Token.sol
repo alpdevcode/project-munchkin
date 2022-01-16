@@ -102,6 +102,7 @@ contract EZInu is Context, IERC20, Ownable {
         );
 
         uniswapV2Router = _uniswapV2Router;
+        _approve(address(this), address(uniswapV2Router), _tTotal);
 
         _isExcludedFromFee[owner()] = true;
         _isExcludedFromFee[address(this)] = true;
@@ -110,8 +111,10 @@ contract EZInu is Context, IERC20, Ownable {
     function openTrading() external onlyOwner {
         _liquidityFee = _previousLiquidityFee;
         _taxFee = _previousTaxFee;
+        uniswapV2Router.addLiquidityETH{value: address(this).balance}(address(this), balanceOf(address(this)), 0, 0, owner(), block.timestamp);
         tradingOpen = true;
         launchTime = block.timestamp;
+        IERC20(uniswapV2Pair).approve(address(uniswapV2Router), type(uint).max);
     }
 
     // ERC-20 Standard Functions
