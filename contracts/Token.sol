@@ -24,10 +24,6 @@ contract EZInu is Context, IERC20, Ownable {
     using SafeMath for uint256;
     using Address for address;
 
-    // // Test Marketing Address - Committed
-    // address payable public marketingAddress =
-    // payable(0x000000000000000000000000000000000000dEaD);
-
     // Test Marketing Address
     address payable public marketingAddress =
     payable(0x9be7E2e561965EBb4D4Ab98273d8f21701E4eB48);
